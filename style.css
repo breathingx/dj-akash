@@ -1,5 +1,96 @@
+:root {
+    --gold: #D4AF37;
+    --black: #121212;
+    --dark-grey: #1f1f1f;
+    --white: #ffffff;
+}
+
 body {
-  font-family: Arial;
-  text-align: center;
-  margin-top: 100px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 2px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+}
+
+nav ul { display: flex; list-style: none; }
+nav ul li { margin-left: 20px; }
+nav ul li a { 
+    text-decoration: none; 
+    color: var(--white); 
+    font-weight: 600;
+    transition: 0.3s;
+}
+nav ul li a:hover { color: var(--gold); }
+
+/* Page Control */
+.page { display: none; padding: 100px 50px; min-height: 80vh; }
+.active { display: block; animation: fadeIn 0.8s ease-in; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
+.hero { text-align: center; margin-top: 100px; }
+.hero h1 { font-family: 'Cinzel', serif; font-size: 4rem; color: var(--gold); }
+
+.gold-btn {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Events */
+.event-card {
+    display: flex;
+    background: var(--dark-grey);
+    margin-bottom: 20px;
+    border-left: 5px solid var(--gold);
+    padding: 20px;
+}
+.event-card .date { font-size: 1.5rem; font-weight: bold; color: var(--gold); margin-right: 30px; min-width: 80px; }
+
+/* Gallery */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+.grid img { width: 100%; border: 1px solid var(--gold); filter: grayscale(30%); transition: 0.3s; }
+.grid img:hover { filter: grayscale(0%); transform: scale(1.05); }
+
+/* Form */
+form { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; }
+input, textarea {
+    background: #333;
+    border: 1px solid var(--gold);
+    padding: 15px;
+    margin-bottom: 15px;
+    color: white;
 }
