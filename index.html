@@ -54,20 +54,25 @@
     <!-- ================================================= -->
 
     <section id="upcoming" class="page">
-        <h2>Upcoming Tour Dates</h2>
+        <h2>Upcoming Events!</h2>
         <div class="event-list">
-            <div class="event-card">
-                <div class="date">OCT 15</div>
+            <div class="event-card" onclick="openFlyer('images/karaokeevent.png')">
+                <div class="date">25 MEI</div>
                 <div class="details">
-                    <h3>Desi Night Live</h3>
-                    <p>Club Sapphire, London</p>
+                    <h3>Karaoke Event bij Stichting Samaanta</h3>
+                    <p>Het 25e jubilieum van de Familiesportdag!</p>
+                    <p>Tijd: 12.30 tot max 15.00</p>
+                    <p>Locatie: Sportpark Schenkel - Capelseweg 31, 2907 XA, Capelle aan den IJssel</p>
                 </div>
             </div>
-            <div class="event-card">
-                <div class="date">NOV 02</div>
+            <div class="event-card" onclick="openFlyer('images/reunievent.jpeg')">
+                <div class="date">14 JUNI</div>
                 <div class="details">
-                    <h3>Diwali Dhamaka</h3>
-                    <p>Grand Plaza, Dubai</p>
+                    <h3>Reünie Party Lloret de Mar - BOMBOL EDITION</h3>
+                    <p>DJ AKASH & SIRODJENI LONDA KE NAACH</p>
+                    <p>Karaoke, Baithak Gana en Live voetbal kijken!</p>
+                    <p>Tijd: 17:00 tot 00:00</p>
+                    <p>Locatie: SVH Noordweg 74 Den Haag</p>
                 </div>
             </div>
         </div>
@@ -186,5 +191,15 @@
         <p><a>Last updated: May 2026 - Designed by <span class="designer">Rahul Ramdas</span></a></p>
     </div>
 </footer>
+
+
+<!-- Flyer pop up code -->
+<div id="flyerModal" class="modal-overlay" onclick="closeFlyer()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeFlyer()">&times;</span>
+        <img id="modalImg" src="" alt="Event Flyer" class="flyer-img">
+</div>
+
+
 </body>    
 </html>

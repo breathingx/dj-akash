@@ -82,12 +82,102 @@ nav ul li a:hover { color: var(--gold); }
 /* Events */
 .event-card {
     display: flex;
+    cursor: pointer;
     background: var(--dark-grey);
+    margin-top: 20px;
     margin-bottom: 20px;
+
+    /* Add a transparent border to the other 3 sides right now. */
+    /* This acts as a placeholder so the layout doesn't "jump" when the border appears on hover. */
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+
     border-left: 5px solid var(--gold);
     padding: 20px;
+    transition: 0.3s;
 }
 .event-card .date { font-size: 1.5rem; font-weight: bold; color: var(--gold); margin-right: 30px; min-width: 80px; }
+
+/* 2. The Hover State Magic */
+.event-card:hover {
+    background: #2a2a2a; /* Lightens the dark grey background slightly to "light it up" */
+    
+    /* Swaps the transparent borders out for golden ones */
+    border-top: 1px solid var(--gold);
+    border-right: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    
+    /* Adds a soft, premium golden neon glow around the card */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); 
+    
+    /* Optional: Slightly lifts the card up for a tactile 3D effect */
+    transform: translateY(-2px); 
+}
+
+/* Pop up modal/flyer */
+/* The dark background overlay that covers the entire screen */
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Deep dark transparency */
+    z-index: 2000; /* Sits on top of everything else, even the navbar */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* When active, flexbox centers the content box */
+.modal-overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* The box holding the flyer image */
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 85vh;
+    animation: zoomIn 0.3s ease;
+}
+
+/* The Flyer Image with its Golden Border and Frame Glow */
+.flyer-img {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    border: 3px solid var(--gold); /* Your golden border */
+    border-radius: 8px;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); /* Soft golden outer neon glow */
+}
+
+/* The 'X' Close Button */
+.close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.close-btn:hover {
+    color: var(--gold);
+}
+
+/* Smooth zoom-in animation for the flyer */
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
 
 /* Gallery */
 .grid {
