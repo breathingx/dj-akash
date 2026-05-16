@@ -51,7 +51,10 @@ nav ul li a:hover { color: var(--gold); }
 }
 
 /* Hero Section */
-.hero { text-align: center; margin-top: 100px; }
+.hero { 
+    text-align: center; 
+    margin-top: 100px; 
+}
 .hero h1 { font-family: 'Cinzel', serif; font-size: 4rem; color: var(--gold); }
 
 .gold-btn {
@@ -64,6 +67,17 @@ nav ul li a:hover { color: var(--gold); }
     border-radius: 5px;
     margin-top: 20px;
 }
+
+
+.hero-bg {/* We layer a 50% dark overlay ON TOP of the image using a gradient */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.95)), url('images/indianparty.jpg');
+    background-size: cover;        /* This forces the image to scale and fill the entire screen */
+    background-position: center;   /* Keeps the focus of the photo dead-center */
+    background-repeat: no-repeat;  /* Stops the image from tiling/repeating */
+    background-attachment: fixed;  /* Optional: gives a cool parallax scrolling effect */
+}
+
+
 
 /* Events */
 .event-card {
@@ -93,4 +107,134 @@ input, textarea {
     padding: 15px;
     margin-bottom: 15px;
     color: white;
+}
+
+
+/* FOOTER  */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+footer{
+    background-color: black;
+}
+/* .footerContainer{
+    width: 100%;
+    padding: 70px 30px 20px ; /* top, left/right, bottom 
+
+} */
+
+.footerContainer {
+    width: 100%;
+    padding: 70px 30px 20px ; /* top, left/right, bottom */
+    display: flex;            /* Turns the container into a flex layout row */
+    justify-content: center;   /* Centers the group of columns on the screen */
+    gap: 80px;                /* Pushes them apart horizontally */
+}
+
+/*------------*/
+/* 2. Each Individual Column forces its internal content to align LEFT */
+.footerColumn {
+    text-align: left;        /*  This keeps your headers and text aligned left! */
+    min-width: 200px;        /* Prevents columns from getting too squished */
+}
+
+/* 3. Style the column headers */
+.footerColumn h3 {
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    margin-bottom: 15px;     /* Space between header and the links below */
+}
+
+/* 4. Clean up the lists inside the columns */
+.footerColumn ul {
+    list-style: none;        /* Removes default bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.footerColumn ul li {
+    margin-bottom: 10px;     /* Vertical spacing between links */
+}
+
+.footerColumn ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.7;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+/* Hover state for links */
+.footerColumn ul li a:hover {
+    opacity: 1;
+    color: var(--gold);      /* Turns gold on hover to match your brand */
+}
+
+
+
+/*------------*/
+
+.footerBottom{
+    background-color: black;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.footerBottom p{
+    color: white;
+}
+.footerBottom p a{
+    opacity: 0.2;
+    transition: 0.5s;
+}
+
+.designer {
+    /* opacity: 0.5; */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 0px 5px;
+}
+
+.footerBottom p a:hover{
+    opacity: 1;
+    .designer{
+        color: gold;
+    }
+}
+
+
+
+/* Phone scaling */
+@media (max-width: 700px){
+    /* Header */
+    nav{
+        padding: 15px 30px;
+    }
+    
+    /* Footer */
+    .footerNav ul{
+        flex-direction: column;
+    } 
+
+    .footerNav{
+        margin: 5px;
+    }
+    .footerContainer{
+        padding: 20px 5px 5px ; /* top, left/right, bottom */
+    }
+    .footerNav ul li{
+        width:100%;
+        text-align: center;
+        margin: 10px;
+    }
+    .socialIcons a{
+        padding: 8px;
+        margin: 4px;
+    }
 }
