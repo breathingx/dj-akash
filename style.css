@@ -3,6 +3,7 @@
     --black: #121212;
     --dark-grey: #1f1f1f;
     --white: #ffffff;
+    --testgreen: #00ff00;
 }
 
 body {
@@ -302,9 +303,31 @@ footer{
 
 /* Phone scaling */
 @media (max-width: 700px){
-    /* Header */
-    nav{
-        padding: 15px 30px;
+/* --- WHAT WE ARE FOCUSING ON (MOBILE NAV) --- */
+    nav {
+        flex-direction: column;    /* Stacks the Logo and the Menu vertically */
+        align-items: center;       /* Centers them both */
+        gap: 15px;                 /* Adds clean space between logo and menu */
+        padding: 10px 20px;        /* Reduces the padding to fit better on smaller screens */
+        width: flex; 
+    }
+    
+    nav ul { 
+        flex-direction: row;       /* Keeps them horizontal, OR change to 'column' if you have many links */
+        flex-wrap: wrap;           /* If links are too long, they safely wrap to the next line instead of breaking the page */
+        justify-content: center;   /* Centers the links under the logo */
+        padding: 0;
+    }
+
+    nav ul li { 
+        margin: 5px 10px;          /* Balanced spacing all around the links on mobile */
+    }
+    /* ------------------------------------------- */
+
+    /* Page Control Mobile Adjustments */
+    .page { 
+        padding: 60px 20px;        /* Reduces giant padding so users don't just see blank space on a phone */
+        
     }
     
     /* Footer */
@@ -316,13 +339,20 @@ footer{
         margin: 5px;
     }
     .footerContainer{
-        padding: 20px 5px 5px ; /* top, left/right, bottom */
+        padding: 20px 5px 5px; 
+        flex-direction: column;    /* Stacks your footer columns vertically on mobile */
+        align-items: center;
+        text-align: center;
+        gap: 30px;
     }
     .footerNav ul li{
         width:100%;
         text-align: center;
         margin: 10px;
     }
+    .footerColumn {
+        text-align: center;        /* Centers footer text for a cleaner mobile look */
+    }   
     .socialIcons a{
         padding: 8px;
         margin: 4px;
