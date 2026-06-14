@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Akash - Admin Panel</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark: #121212;
+            --light-dark: #1e1e1e;
+            --text: #ffffff;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: var(--light-dark);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+        h2 {
+            color: var(--gold);
+            text-align: center;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--gold);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #bfa030;
+        }
+        .hidden { display: none !important; }
+        .logout-btn {
+            background-color: #c0392b;
+            color: white;
+            margin-top: 10px;
+        }
+        .logout-btn:hover { background-color: #a33226; }
+        .status-msg { text-align: center; margin-top: 10px; color: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div id="login-section" class="container">
+        <h2>DJ Akash Admin Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" required placeholder="admin@dj-akash.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" required placeholder="••••••••">
+            </div>
+            <button type="submit">Log In</button>
+        </form>
+        <div id="login-msg" class="status-msg"></div>
+    </div>
+
+    <div id="dashboard-section" class="container hidden">
+        <h2>Add New Event</h2>
+        <form id="event-form">
+            <div class="form-group">
+                <label>Event Name</label>
+                <input type="text" id="event-name" required placeholder="e.g., Karaoke Night">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="event-desc" rows="3" required placeholder="Event details..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="event-date" required>
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <input type="time" id="event-time" required>
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" id="event-location" required placeholder="e.g., SVH Den Haag">
+            </div>
+            <div class="form-group">
+                <label>Event Flyer (Single Image)</label>
+                <input type="file" id="event-flyer" accept="image/*" required>
+            </div>
+            <button type="submit" id="submit-btn">Publish Event</button>
+        </form>
+        
+        <div id="upload-msg" class="status-msg"></div>
+        <button class="logout-btn" id="logout-btn">Log Out</button>
+    </div>
+
+    <script>
+// --- CONFIGURATION ---
+        const SUPABASE_URL = 'https://fiibrecmehhebuthkvcz.supabase.co'; 
+        const SUPABASE_KEY = 'sb_publishable_037d9RVXZEJAFuL0eiXSyQ_gx5l6gWt'; 
+
+        // Initialize Supabase Client with a unique variable name
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // DOM Elements
+        const loginSection = document.getElementById('login-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const loginForm = document.getElementById('login-form');
+        const eventForm = document.getElementById('event-form');
+        const logoutBtn = document.getElementById('logout-btn');
+        const loginMsg = document.getElementById('login-msg');
+        const uploadMsg = document.getElementById('upload-msg');
+
+        // Check if user is already logged in on page load
+        async function checkUser() {
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                if (session) {
+                    showDashboard();
+                } else {
+                    showLogin();
+                }
+            } catch (err) {
+                console.error("Session check error:", err);
+            }
+        }
+        checkUser();
+
+        // Handle Login
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            loginMsg.textContent = "Logging in...";
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                loginMsg.textContent = "Error: " + error.message;
+            } else {
+                loginMsg.textContent = "";
+                showDashboard();
+            }
+        });
+
+        // Handle Logout
+        logoutBtn.addEventListener('click', async () => {
+            await supabaseClient.auth.signOut();
+            showLogin();
+        });
+
+        // Handle Event Creation & File Upload
+        eventForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            uploadMsg.textContent = "Uploading event data and flyer...";
+
+            try {
+                // 1. Gather text values
+                const name = document.getElementById('event-name').value;
+                const description = document.getElementById('event-desc').value;
+                const event_date = document.getElementById('event-date').value;
+                const event_time = document.getElementById('event-time').value;
+                const location = document.getElementById('event-location').value;
+                
+                // 2. Upload Flyer to Storage
+                const flyerFile = document.getElementById('event-flyer').files[0];
+                if (!flyerFile) throw new Error("Please select a flyer image.");
+
+                const fileExt = flyerFile.name.split('.').pop();
+                const fileName = `${Date.now()}.${fileExt}`;
+                const filePath = `public/${fileName}`;
+
+                const { data: uploadData, error: uploadError } = await supabaseClient.storage
+                    .from('flyers')
+                    .upload(filePath, flyerFile);
+
+                if (uploadError) throw uploadError;
+
+                // Get Public URL of uploaded flyer
+                const { data: urlData } = supabaseClient.storage.from('flyers').getPublicUrl(filePath);
+                const flyer_url = urlData.publicUrl;
+
+                // 3. Insert Row into Database
+                const { data: insertData, error: insertError } = await supabaseClient
+                    .from('events')
+                    .insert([{ name, description, event_date, event_time, location, flyer_url }])
+                    .select();
+
+                if (insertError) throw insertError;
+
+                uploadMsg.textContent = "✨ Event Published Successfully!";
+                eventForm.reset();
+
+            } catch (err) {
+                uploadMsg.textContent = "Error: " + err.message;
+                console.error(err);
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Helper interface toggles
+        function showDashboard() {
+            loginSection.classList.add('hidden');
+            dashboardSection.classList.remove('hidden');
+        }
+        function showLogin() {
+            loginSection.classList.remove('hidden');
+            dashboardSection.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
