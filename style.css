@@ -30,6 +30,19 @@ nav {
     font-family: 'Cinzel', serif;
     font-size: 1.5rem;
     color: var(--gold);
+    display: flex;
+    align-itmes: center;
+    gap: 10px;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.logo span {
+    line-height: 2;
 }
 
 nav ul { display: flex; list-style: none; }
@@ -191,7 +204,13 @@ nav ul li a:hover { color: var(--gold); }
 .grid img:hover { filter: grayscale(0%); transform: scale(1.05); }
 
 /* Form */
-form { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; }
+form { 
+    max-width: 500px; 
+    padding: 50px 0px 50px ; 
+    margin: 0 auto; 
+    display: flex; 
+    flex-direction: column; 
+}
 input, textarea {
     background: #333;
     border: 1px solid var(--gold);
