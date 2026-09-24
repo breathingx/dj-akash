@@ -1,0 +1,214 @@
+:root {
+    --gold: #d4af37;
+    --dark: #121212;
+    --light-dark: #1e1e1e;
+    --text: #ffffff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--light-dark);
+    padding: 30px;
+    border-radius: 8px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+
+    width: 100%;
+    max-width: 500px;
+
+    box-sizing: border-box;
+}
+
+h2 {
+    color: var(--gold);
+    text-align: center;
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+
+    color: #fff;
+
+    border-radius: 4px;
+
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+
+    background-color: var(--gold);
+    color: #000;
+
+    border: none;
+
+    font-weight: bold;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #bfa030;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.logout-btn {
+    background-color: #c0392b;
+    color: white;
+
+    margin-top: 10px;
+}
+
+.logout-btn:hover {
+    background-color: #a33226;
+}
+
+.status-msg {
+    text-align: center;
+    margin-top: 10px;
+    color: var(--gold);
+}
+
+
+/* Event selector */
+
+#edit-event-selector {
+    width: 100%;
+    padding: 10px;
+
+    background: #2a2a2a;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 4px;
+}
+
+
+/* Admin photo stream */
+
+#admin-photo-stream {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(100px, 1fr)
+    );
+
+    gap: 10px;
+
+    background: #1a1a1a;
+
+    padding: 10px;
+
+    border-radius: 4px;
+
+    min-height: 50px;
+}
+
+.empty-photo-message {
+    color: #666;
+    font-size: 13px;
+
+    text-align: center;
+
+    grid-column: 1 / -1;
+
+    margin: 10px 0;
+}
+
+
+/* Edit event form */
+
+#edit-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+}
+
+#edit-fieldset:disabled {
+    opacity: 0.5;
+}
+
+#edit-flyer-wrap {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+#edit-flyer-preview {
+    display: block;
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.photo-delete-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+
+    width: 22px;
+    height: 22px;
+    padding: 0;
+
+    background: rgba(192, 57, 43, 0.9);
+    color: white;
+
+    border-radius: 50%;
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.photo-delete-btn:hover {
+    background: rgba(163, 50, 38, 1);
+}
