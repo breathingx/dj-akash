@@ -67,7 +67,7 @@ nav ul li a:hover { color: var(--gold); }
 /* Hero Section */
 .hero { 
     text-align: center; 
-    margin-top: 100px; 
+    margin-top: 100px;
 }
 .hero h1 { font-family: 'Cinzel', serif; font-size: 4rem; color: var(--gold); }
 
@@ -315,6 +315,82 @@ footer{
     opacity: 1;
     .designer{
         color: gold;
+    }
+}
+
+/* =====================================================
+   VISITOR COUNTER
+   ===================================================== */
+
+.visitor-counter {
+    margin: 18px auto 0 auto;
+
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    text-align: center;
+
+    display: block;
+    width: fit-content;
+
+    padding: 8px 16px;
+
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 20px;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.visitor-counter span {
+    margin-left: 4px;
+    text-align: center;
+    color: var(--gold, #d4af37);
+    font-size: 14px;
+    font-weight: 700;
+    width: fit-content;
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+    width: fit-content;
+    text-align: center;
+}
+
+.visitor-counter:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(0, 0, 0, 0.55);
+}
+
+
+
+/* =====================================================
+   LOADING STATE
+   ===================================================== */
+
+.visitor-counter span:empty {
+    opacity: 0.5;
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+    .visitor-counter {
+        bottom: 15px;
+        padding: 8px 16px;
+        width: fit-content;
+        text-align: center;
+        font-size: 11px;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+
+    .visitor-counter span {
+        font-size: 13px;
     }
 }
 

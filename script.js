@@ -287,3 +287,34 @@ function closeFlyer() {
         modalImg.src = "";
     }, 300); 
 }
+
+async function updateVisitCounter() {
+    console.log("Visit counter started");
+
+    const { error: insertError } = await supabaseClient
+        .from('page_views')
+        .insert({
+            page: 'home'
+        });
+
+    if (insertError) {
+        document.getElementById('visit-count').textContent = 'ERROR';
+        console.error("Could not insert visit:", insertError);
+        return;
+    }
+
+    const { count, error: countError } = await supabaseClient
+        .from('page_views')
+        .select('*', { count: 'exact', head: true })
+        .eq('page', 'home');
+
+    if (countError) {
+        document.getElementById('visit-count').textContent = 'ERROR';
+        console.error("Could not get count:", countError);
+        return;
+    }
+
+    document.getElementById('visit-count').textContent = count;
+}
+
+updateVisitCounter();
